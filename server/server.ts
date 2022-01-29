@@ -1,0 +1,41 @@
+const path = require('path');
+const express = require('express');
+const { fsync } = require('fs');
+const userRoutes = require('./routes/userRoutes.ts');
+
+const PORT = 3000;
+const app = express();
+// const { OauthTwo } = require('./controllers/oauthControllers')
+var cors = require('cors');
+
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use(express.json());
+
+// app.use(express.static('assets'));
+
+
+app.use('/users', userRoutes);
+
+app.use(express.static(path.join(__dirname, '../' )))
+
+
+app.get('/', (req: any, res: { status: (arg0: number) => { (): any; new(): any; sendFile: { (arg0: any): void; new(): any; }; }; }) => {
+  res.status(200).sendFile(path.resolve(__dirname, '../src/index.html'));
+});
+
+
+
+//global error handler
+app.use('/', (err: any, req: any, res: { status: (arg0: any) => { (): any; new(): any; json: { (arg0: any): any; new(): any; }; }; }, next: any) => {
+  const defaultError = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 500,
+    message: { err: 'Internal Server Error' },
+  };
+  const errorObject = Object.assign({}, defaultError, err);
+  console.log(errorObject.log);
+  return res.status(errorObject.status).json(errorObject.message);
+});
+
+app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
