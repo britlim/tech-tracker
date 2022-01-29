@@ -4,6 +4,9 @@
   "description": "Tool to manage and track depth of knowledge for different technologies",
   "main": "index.js",
   "scripts": {
+    "webpack": "webpack",
+    "start": "webpack serve",
+    "dev": "cross-env NODE_ENV=development concurrently \"webpack serve --https'\" \"nodemon --watch server server/index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
