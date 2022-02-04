@@ -20,14 +20,14 @@ app.use('/users', userRoutes);
 app.use(express.static(path.join(__dirname, '../' )))
 
 
-app.get('/', (req: any, res: { status: (arg0: number) => { (): any; new(): any; sendFile: { (arg0: any): void; new(): any; }; }; }) => {
+app.get('/', (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../src/index.html'));
 });
 
 
 
 //global error handler
-app.use('/', (err: any, req: any, res: { status: (arg0: any) => { (): any; new(): any; json: { (arg0: any): any; new(): any; }; }; }, next: any) => {
+app.use('/', (err, req, res, next) => {
   const defaultError = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,
