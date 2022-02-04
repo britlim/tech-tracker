@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const { fsync } = require('fs');
-const userRoutes = require('./routes/userRoutes.ts');
+const userRoutes = require('./routes/userRoutes.js');
 
 const PORT = 3000;
 const app = express();
